@@ -11,12 +11,15 @@ char * plusNum(char * num1, char * num2, int length);
 
 void reverseNum(char * s);
 
+int countZero(char * s);
+
 int numLen(char * s);   //to cal the length;
 
 int main(void)
 {
     char num1[MAX + 1];
     char num2[MAX + 1];
+    char * result;
 
     //Init all of them:
     setZero(num1, MAX, '0');
@@ -29,7 +32,9 @@ int main(void)
 
     //Output the result:
     printf("The result is:\n");
-    puts(plusNum(num1, num2, MAX) + 1);
+    result = plusNum(num1, num2, MAX);
+    result += countZero(result + 1) + 1;
+    puts(result);
 
 
     return 0;
@@ -75,6 +80,7 @@ void reverseNum(char * s)
     for(i=0;i<l/2;i++)
     {
         temp = s[l-1-i];
+
         s[l-1-i] = s[i];
         s[i] = temp;
     }
@@ -119,4 +125,13 @@ char * plusNum(char * num1, char * num2, int length)
     out[length] = '\0';
 
     return out;
+}
+
+int countZero(char * s)
+{
+    int i = 0;
+    for(;s[i] == '0';i++)
+        continue;
+
+    return i;
 }
